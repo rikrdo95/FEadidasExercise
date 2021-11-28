@@ -1,7 +1,6 @@
 package com.adidas.hooks;
 
 import com.adidas.stepsDefinitions.stepsDefinitions;
-import com.adidas.utils.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -7,25 +7,16 @@ import com.adidas.pageObjects.CartPage;
 import com.adidas.pageObjects.HomePage;
 import com.adidas.utils.utils;
 
-import org.json.simple.JSONObject;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.serenitybdd.core.annotations.findby.By;
-import net.thucydides.core.annotations.Managed;
 import net.thucydides.core.annotations.Steps;
 import cucumber.api.java.en.Given;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
 import java.util.List;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 public class stepsDefinitions {
 

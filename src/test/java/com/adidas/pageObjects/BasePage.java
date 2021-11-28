@@ -8,14 +8,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.Step;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 
 public class BasePage {
-    
+
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 
