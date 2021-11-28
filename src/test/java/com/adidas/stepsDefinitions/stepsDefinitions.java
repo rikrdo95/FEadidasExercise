@@ -1,54 +1,107 @@
 package com.adidas.stepsDefinitions;
 
-import com.adidas.serenitySteps.steps;
 
-import cucumber.api.DataTable;
+import com.adidas.hooks.Hooks;
+import com.adidas.pageObjects.BasePage;
+import com.adidas.pageObjects.CartPage;
+import com.adidas.pageObjects.HomePage;
+import com.adidas.utils.utils;
+
+import org.json.simple.JSONObject;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import net.serenitybdd.core.annotations.findby.By;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
 import cucumber.api.java.en.Given;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class stepsDefinitions {
 
+  @Steps
+  BasePage basePage = new BasePage(driver, wait);
+
+  @Steps
+  HomePage homePage = new HomePage(driver, wait);
+
+  @Steps
+  CartPage cartPage = new CartPage(driver, wait);
+  
+  static WebDriver driver;
+	static WebDriverWait wait;
+  static String baseUrl;
+  String cartEndpoint;
+
+  @Given("^I am in \"([^\"]*)\" page$")
+  public void iAmInPAGE(String endpoint) {
+    basePage.goTo(baseUrl, endpoint);
+  }
+
   @Given("^I navigate to the section \"([^\"]*)\"$")
-  @And("^I navigate to the section \"([^\"]*)\"$")
-  @Then("^I navigate to the section \"([^\"]*)\"$")
   public void iNavigateToTheSectionSECTION(String section) {
-    steps.iNavigateToTheSectionsSECTIONS(section);
+    homePage.goToSection(section);
   }
 
   @And("^I add to the cart the product \"([^\"]*)\"$")
   public void iAddToTheCartTheProductPRODUCT(String product) {
-    steps.iAddToTheCartTheProductPRODUCT(product);
+    homePage.addProductToCart(product);
   }
 
   @Then("^I delete from the cart the product \"([^\"]*)\"$")
   public void iDeleteFromTheCartTheProductPRODUCT(String product) {
-    steps.iDeleteFromTheCartTheProductPRODUCT(product);
+    cartPage.deleteProductFromCart(product);
   }
 
   @When("^I want to place the order$")
   public void iWantToPlaceTheOrder() {
-    steps.iWantToPlaceTheOrder();
+    cartPage.placeOrder();
   }
 
   @And("^I fill the form fields$")
   public void iFillTheFormFields() {
-    steps.iFillTheFormFields();
+    cartPage.fillForm();
   }
 
   @And("^I click on \"([^\"]*)\"$")
   public void iClickOnELEMENT(String element) {
-    steps.iClickOnELEMENT(element);
+    cartPage.finishOrder(element);
   }
 
-  @Then("^I check the field(?s)$")
-  public void iCheckTheFields(DataTable fields) {
-    steps.iCheckTheFields(fields);
+  @Then("^I check the field(?:s)$")
+  public void iCheckTheFields(List<String> fields) {
+    cartPage.checkFields(fields);
   }
 
-  @And("^I click on Ok to finish the purchase$")
-  public void iClickOnOkToFinishThePurchase() {
-    steps.iClickOnOkToFinishThePurchase();
+  @And("^I click on OK to finish the purchase$")
+  public void iClickOnOKToFinishThePurchase() {
+    wait(500);
+    driver.findElement(By.buttonText("OK")).click();
+  }
+
+  private void wait(int milis) {
+    try {
+      Thread.sleep(milis);
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+
+  public static void setUpEnvironment() {
+    driver = Hooks.driver;
+    wait = Hooks.wait;
+
+    baseUrl = utils.getProjectProperties("BASE_URL");
   }
 
 }

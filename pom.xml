@@ -117,6 +117,12 @@
           </includes>
           <parallel>methods</parallel>
           <useUnlimitedThreads>true</useUnlimitedThreads>
+          <systemProperties>
+            <property>
+              <name>browser</name>
+              <value>${browser}</value>
+            </property>
+          </systemProperties>
         </configuration>
         <executions>
           <execution>
