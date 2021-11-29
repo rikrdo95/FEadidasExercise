@@ -50,7 +50,7 @@ public class Hooks {
 	private WebDriver initializeDriver(String browser) {
 		WebDriver driver;
 
-		switch(browser){
+		switch (browser) {
 			case "chrome":
 				System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
 				ChromeOptions chrome_options = new ChromeOptions();
@@ -71,7 +71,6 @@ public class Hooks {
 				break;
 			default:
 				driver = new ChromeDriver();
-				
 		}
 		return driver;
 	}

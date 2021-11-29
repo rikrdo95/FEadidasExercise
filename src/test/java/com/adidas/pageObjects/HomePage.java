@@ -1,6 +1,5 @@
 package com.adidas.pageObjects;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -9,17 +8,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import net.serenitybdd.core.annotations.findby.By;
 import net.thucydides.core.annotations.Step;
 
-
 public class HomePage extends BasePage {
 
-	private WebElement productElement;
-	private WebElement addToCartLink;
+    private WebElement productElement;
+    private WebElement addToCartLink;
 
-
-	public HomePage(WebDriver driver, WebDriverWait wait) {
-		super(driver, wait);
+    public HomePage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
         PageFactory.initElements(driver, this);
-	}
+    }
 
     @Step
     public void goToSection(String section) {
@@ -41,5 +38,5 @@ public class HomePage extends BasePage {
 
         waitAlertAndAccept();
     }
-        
+
 }

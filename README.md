@@ -4,9 +4,9 @@ Front-end automated testing repo by Ricardo Villanueva Ojosnegros for Adidas' re
 
 ## Requirements
 
- - Java 11
- - Maven XXX
- - Windows
+ - Java 11.0.13
+ - Maven 3.8.4
+ - Windows 10
  - Git
  - Chrome 96.0.4664.45 or firefox 78 and superior versions
  
@@ -22,7 +22,7 @@ Run this command in project directory
 
 You can choose the browser adding this to the previous comand
 
-    -Dbrowser="BROWSER"
+    -Dbrowser=BROWSER
 >By default the browser is set to chrome.
 
 Browser options:

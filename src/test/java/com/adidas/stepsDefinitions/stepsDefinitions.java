@@ -1,6 +1,5 @@
 package com.adidas.stepsDefinitions;
 
-
 import com.adidas.hooks.Hooks;
 import com.adidas.pageObjects.BasePage;
 import com.adidas.pageObjects.CartPage;
@@ -28,9 +27,9 @@ public class stepsDefinitions {
 
   @Steps
   CartPage cartPage = new CartPage(driver, wait);
-  
+
   static WebDriver driver;
-	static WebDriverWait wait;
+  static WebDriverWait wait;
   static String baseUrl;
   String cartEndpoint;
 
@@ -76,16 +75,7 @@ public class stepsDefinitions {
 
   @And("^I click on OK to finish the purchase$")
   public void iClickOnOKToFinishThePurchase() {
-    wait(500);
-    driver.findElement(By.buttonText("OK")).click();
-  }
-
-  private void wait(int milis) {
-    try {
-      Thread.sleep(milis);
-    } catch (Exception e) {
-      System.out.println(e);
-    }
+    cartPage.finish();
   }
 
   public static void setUpEnvironment() {
