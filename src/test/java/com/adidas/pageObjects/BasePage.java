@@ -3,6 +3,7 @@ package com.adidas.pageObjects;
 import com.adidas.utils.utils;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,32 +29,22 @@ public class BasePage {
         assertThat(driver.getCurrentUrl(), is(baseUrl + (endpoint.equals("home") ? "" : getEndpoint(endpoint))));
     }
 
-    public void click(WebElement element) {
-        element.click();
+    public void click(By by) {
+        driver.findElement(by).click();
     }
 
     public void writeText(WebElement element, String word) {
         element.sendKeys(word);
     }
 
-    public void waitVisibility(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
+    public void waitVisibility(By by) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     public void waitAlertAndAccept() {
-        wait(500);
-        ExpectedConditions.alertIsPresent();
+        wait.until(ExpectedConditions.alertIsPresent());
         Alert myalert = driver.switchTo().alert();
         myalert.accept();
-    }
-
-    public String exists(WebElement element) {
-        waitVisibility(element);
-        if (element.getText().isEmpty()) {
-            return element.getText();
-        } else {
-            return "null";
-        }
     }
 
     public void wait(int milis) {
