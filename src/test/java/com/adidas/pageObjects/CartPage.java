@@ -10,7 +10,6 @@ import com.adidas.utils.utils;
 
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import net.serenitybdd.core.annotations.findby.By;
@@ -31,6 +30,7 @@ public class CartPage extends BasePage {
 
     @Step
     public void deleteProductFromCart(String product) {
+        // Wait for the second element to appear
         waitVisibility(By.xpath("//*[@id=\"tbodyid\"]/tr[2]/td[2]"));
         // Find position of the product in the list
         int productIndex = -1;
