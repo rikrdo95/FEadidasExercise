@@ -21,11 +21,6 @@ import static org.hamcrest.Matchers.*;
 
 public class CartPage extends BasePage {
 
-    private WebElement firstElementOfTheCart;
-    private WebElement placeOrderButton;
-    private WebElement purchaseButton;
-    private WebElement resumeOrder;
-
     private String idOrder;
     private HashMap<String, String> productsValues = new HashMap<String, String>();
     private String amountResume;
@@ -36,9 +31,7 @@ public class CartPage extends BasePage {
 
     @Step
     public void deleteProductFromCart(String product) {
-        wait(1000);
-        firstElementOfTheCart = driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/tr[1]/td[2]"));
-        waitVisibility(firstElementOfTheCart);
+        waitVisibility(By.xpath("//*[@id=\"tbodyid\"]/tr[2]/td[2]"));
         // Find position of the product in the list
         int productIndex = -1;
         for (int i = 1; i <= 2; i++) {
@@ -47,7 +40,7 @@ public class CartPage extends BasePage {
             }
         }
 
-        click(driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/tr[" + productIndex + "]/td[4]/a")));
+        click(By.xpath("//*[@id=\"tbodyid\"]/tr[" + productIndex + "]/td[4]/a"));
         wait(3000);
         assertThat(driver.findElement(By.xpath("//*[@id=\"tbodyid\"]/tr/td[2]")).getText(), not(product));
 
@@ -59,16 +52,14 @@ public class CartPage extends BasePage {
 
     @Step
     public void placeOrder() {
-        placeOrderButton = driver.findElement(By.buttonText("Place Order"));
-        waitVisibility(placeOrderButton);
-        click(placeOrderButton);
+        waitVisibility(By.buttonText("Place Order"));
+        click(By.buttonText("Place Order"));
     }
 
     @Step
     public void fillForm() {
-        wait(1000);
         JSONObject formString = utils.getJSON("form");
-        waitVisibility(driver.findElement(By.xpath("//*[@id=\"orderModal\"]/div/div")));
+        waitVisibility(By.xpath("//*[@id=\"orderModal\"]/div/div"));
 
         writeText(driver.findElement(By.id("name")), (String) formString.get("name"));
         writeText(driver.findElement(By.id("country")), (String) formString.get("country"));
@@ -80,18 +71,15 @@ public class CartPage extends BasePage {
 
     @Step
     public void finishOrder(String element) {
-        wait(1000);
-        purchaseButton = driver.findElement(By.buttonText(element));
-        waitVisibility(purchaseButton);
-        click(purchaseButton);
+        waitVisibility(By.buttonText(element));
+        click(By.buttonText(element));
     }
 
     @Step
     public void checkFields(List<String> fields) {
-        resumeOrder = driver.findElement(By.xpath("/html/body/div[10]/p"));
-        waitVisibility(resumeOrder);
+        waitVisibility(By.xpath("/html/body/div[10]/p"));
 
-        String resumeText = resumeOrder.getText();
+        String resumeText = driver.findElement(By.xpath("/html/body/div[10]/p")).getText();
         Pattern patternId = Pattern.compile("Id: (\\d*)");
         Pattern patternAmount = Pattern.compile("Amount: (\\d*)");
         Matcher matcher = patternId.matcher(resumeText);
@@ -111,8 +99,8 @@ public class CartPage extends BasePage {
 
     @Step
     public void finish() {
-        wait(500);
-        driver.findElement(By.buttonText("OK")).click();
+        waitVisibility(By.buttonText("OK"));
+        click(By.buttonText("OK"));
     }
 
 }
