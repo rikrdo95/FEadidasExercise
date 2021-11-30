@@ -30,4 +30,4 @@ Browser options:
 - firefox
 
 ## Check results
-In the folder BEadidasExercise/target/site/serenity open the file index.html after the execution finish to open the report. 
+In the folder FEadidasExercise/target/site/serenity open the file index.html after the execution finish to open the report. 
